@@ -5,9 +5,43 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+* {
+  box-sizing: border-box;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+.parallax {
+  min-height: 600px;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.parallax-box {
+  background-color: rgba(0, 0, 0, 0.5);
+  min-height: 600px;
+  padding-top: 3rem;
+}
+.parallax-text {
+  color: white;
+  font-size: 5rem;
+  font-weight: 900;
+  text-align: center;
+}
+@media (max-width: 706px) {
+  .parallax-text {
+    font-size: 3rem;
+  }
+}
+.sub-heading {
+  background: -webkit-linear-gradient(var(--grey-600), var(--grey-800));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 700;
 }
