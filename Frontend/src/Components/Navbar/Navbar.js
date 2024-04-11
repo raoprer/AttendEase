@@ -40,15 +40,8 @@ const Navbar = (props) => {
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#contact-us">
-                  Contact Us
-                </a>
-              </li>
-
-              <li class="nav-item">
-                <a class="nav-link text-dark fw-medium " href="">
-                  {' '}
-                  Login/SignUp{' '}
+                <a class="nav-link nav-btn" href="#how-it-works">
+                  Login
                 </a>
               </li>
             </ul>

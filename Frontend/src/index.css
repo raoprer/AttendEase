@@ -26,17 +26,23 @@ code {
 }
 
 .sub-heading {
-  background: -webkit-linear-gradient(var(--grey-600), var(--grey-800));
+  font-weight: 500;
+}
+
+i {
+  background: -webkit-linear-gradient(rgb(0, 0, 0), rgb(150, 150, 150));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  font-weight: 700;
+}
+i:hover {
+  background: -webkit-linear-gradient(rgb(150, 150, 150), rgb(0, 0, 0));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 /*------NAVIGATION BAR------*/
 .navbar {
   background-color: transparent; /* Remove the background color to make it transparent */
-  /* margin-left: 3.7%;
-  margin-right: 3.7%; */
 }
 
 .navbar .nav-item {
@@ -47,6 +53,11 @@ code {
   background-color: #000000;
   color: white;
   /* border-radius: 10%; */
+}
+
+.nav-btn {
+  background-color: #000000;
+  color: white;
 }
 
 .logo img {
@@ -95,39 +106,18 @@ code {
 #banner .banner {
   text-decoration: none;
 }
-#banner .container .row .btn {
-  background-color: #a1d035;
-}
 
 #banner .row img {
   height: auto;
   margin: 5px;
-  margin-top: 50px;
-  margin-right: 20px;
-  padding-right: 20px;
   max-width: 100%;
   text-align: center;
 }
 
-/*---------AboutUs--------*/
-#AboutUs .container {
-  background-color: #c4e8a0; /*comment out*/
-  border-radius: 20px;
-  padding-bottom: 4vh;
-  margin-bottom: 6vh;
-}
+/*--------Features---------*/
 
-#AboutUs .row img {
-  height: 450px;
-  max-width: 100%;
-  text-align: center;
-  padding: 5%;
-  margin: 5%;
-  margin-top: 80px;
-}
-
-#AboutUs .aboutus-title {
-  margin-top: 90px;
+#features .card {
+  border-radius: px;
 }
 
 /*-------How it Works-------*/
@@ -136,50 +126,13 @@ code {
   border-radius: 20px;
 }
 
-#HowitWorks .title {
-  margin-top: 90px;
-}
-
-#HowitWorks .row img {
-  height: 450px;
-  max-width: 100%;
-  text-align: center;
-  padding: 5%;
-  margin: 5%;
-  margin-top: 80px;
-}
-
 #HowitWorks .container {
   padding-bottom: 4vh;
   margin-bottom: 7vh;
 }
 
 #how-it-works {
-  margin-left: 2%;
-  margin-right: 2%;
-  border-radius: 25px;
-}
-
-/*-----   FAQs  -----*/
-#faqs {
-  color: white;
-}
-
-#faqs .accordion {
-  padding-left: 5%;
-  padding-right: 5%;
-  margin-top: 10vh;
-  margin-bottom: 20vh;
-}
-
-#faqs h1 {
-  padding-bottom: 50px;
-}
-
-/*----- Contact Form ------*/
-#contact-us {
-  background-color: white;
-  border-radius: 25px;
   margin: 5%;
   padding: 2%;
+  border-radius: 25px;
 }

@@ -1,5 +1,5 @@
 import React from 'react'
-import img1 from '../../Images/landing_bg.jpeg'
+import bg from '../../Images/background.jpeg'
 
 const Parallax = (props) => {
   let tag = props.tag
@@ -7,7 +7,7 @@ const Parallax = (props) => {
     <div
       className="parallax-bg"
       style={{
-        backgroundImage: `url(${img1})`,
+        backgroundImage: `url(${bg})`,
         minHeight: 'calc(100vh - 100px)',
       }}
     >
