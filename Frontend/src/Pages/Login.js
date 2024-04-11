@@ -13,7 +13,7 @@ const Login = () => {
   return (
     <>
       <Navbar hide={1} />
-      <Parallax id={2} tag={tag}></Parallax>
+      <Parallax tag={tag}></Parallax>
       <Footer />
     </>
   )
