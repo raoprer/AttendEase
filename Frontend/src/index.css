@@ -17,42 +17,12 @@ code {
     monospace;
 }
 
-/* .parallax {
-  min-height: 900px;
+.parallax-bg {
+  min-height: 600px;
   background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-}
-
-.parallax-box {
-  background-color: rgba(0, 0, 0, 0.5);
-  min-height: 600px;
-  padding-top: 3rem;
-}
-
-.parallax-text {
-  color: white;
-  font-size: 5rem;
-  font-weight: 900;
-  text-align: center;
-}
-
-@media (max-width: 706px) {
-  .parallax-text {
-    font-size: 3rem;
-  }
-} */
-
-.parallax-bg {
-  background-size: cover;
-  background-position: center;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -2;
 }
 
 .sub-heading {
@@ -65,8 +35,8 @@ code {
 /*------NAVIGATION BAR------*/
 .navbar {
   background-color: transparent; /* Remove the background color to make it transparent */
-  margin-left: 3.7%;
-  margin-right: 3.7%;
+  /* margin-left: 3.7%;
+  margin-right: 3.7%; */
 }
 
 .navbar .nav-item {
@@ -76,7 +46,7 @@ code {
 .navbar .nav-item .nav-link:hover {
   background-color: #000000;
   color: white;
-  border-radius: 10%;
+  /* border-radius: 10%; */
 }
 
 .logo img {
