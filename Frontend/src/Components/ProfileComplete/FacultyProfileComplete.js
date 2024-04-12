@@ -1,7 +1,9 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import dp from '../../Images/profile_dp.png'
 import ModalPictureUpload from '../Modal/ModalPictureUpload'
 import ModalSuccess from '../Modal/ModalSuccess'
+import variables from '../../Variables'
+import axios from 'axios'
 
 const FacultyProfileComplete = () => {
   return (
@@ -10,7 +12,7 @@ const FacultyProfileComplete = () => {
         <div class="col-md-8">
           <div class="card">
             <div class="card-header text-center">
-              <h2>Complete Your Faculty Profile Information</h2>
+              <h2>Faculty Profile Page</h2>
             </div>
             <div class="card-body">
               <form>

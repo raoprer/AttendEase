@@ -8,6 +8,8 @@ from AttendEase.serializers import InstituteSerializer, DegreeSerializer, Course
 
 from django.core.files.storage import default_storage
 
+from django.http import JsonResponse
+
 @csrf_exempt
 def instituteApi(request,id=0):
     if request.method=='GET':
@@ -265,3 +267,23 @@ def learnsApi(request, id=0):
         learns = Learns.objects.get(s_id=id)
         learns.delete()
         return JsonResponse("Deleted Successfully", safe=False)
+    
+@csrf_exempt
+def faculty_courses(request, faculty_id):
+    if request.method == 'GET':
+        try:
+            faculty = Faculty.objects.get(id=faculty_id)
+            courses = Course.objects.filter(teaches__f_id=faculty)
+            course_data = [{'id': course.id, 'c_code': course.c_code, 'c_name': course.c_name, 'credits': course.credits} for course in courses]
+            return JsonResponse(course_data, safe=False)
+        except Faculty.DoesNotExist:
+            return JsonResponse({'error': 'Faculty not found'}, status=404)
+
+@csrf_exempt
+def upload_file(request):
+    if request.method == 'POST' and request.FILES['file']:
+        file = request.FILES['file']
+        file_name = default_storage.save('Photos/' + file.name, file)
+        return JsonResponse({'message': 'File uploaded successfully', 'file_name': file_name}, status=200)
+    else:
+        return JsonResponse({'error': 'File not provided or request method not allowed'}, status=400)

@@ -28,4 +28,6 @@ urlpatterns=[
 
     url(r'^learns$',views.learnsApi),
     url(r'^learns/([0-9]+)$',views.learnsApi),
-]
+
+    # url(r'^attendease/savefile',views.SaveFile)
+]+static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

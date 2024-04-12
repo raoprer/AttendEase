@@ -10,7 +10,7 @@ const InstituteProfileComplete = () => {
         <div class="col-md-8">
           <div class="card">
             <div class="card-header text-center">
-              <h2>Complete Your Institute Profile Information</h2>
+              <h2>Institute Profile Page</h2>
             </div>
             <div class="card-body">
               <form>

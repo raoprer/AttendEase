@@ -26,7 +26,7 @@ urlpatterns = [
 
     path('degree', views.degreeApi),
     re_path(r'^degree/([0-9]+)$', views.degreeApi),
-    
+
     path('course', views.courseApi),
     re_path(r'^course/([0-9]+)$', views.courseApi),
 
@@ -47,5 +47,12 @@ urlpatterns = [
 
     path('learns', views.learnsApi),
     re_path(r'^learns/([0-9]+)$', views.learnsApi),
+
+    path('faculty/<int:faculty_id>/courses/', views.faculty_courses, name='faculty_courses'),
+
+    path('upload/', views.upload_file, name='upload_file'),
 ]
+
+
+
 
