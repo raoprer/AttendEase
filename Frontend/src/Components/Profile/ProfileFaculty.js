@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import dp from '../../Images/profile_dp.png'
+import Modal from '../Modal/Modal'
 
 const ProfileFaculty = (props) => {
   const [faculty, setFaculty] = useState([])
@@ -67,7 +68,7 @@ const ProfileFaculty = (props) => {
       // Use map instead of forEach to create an array of strings
       const coursesHandled = faculty[i].f_teaches.map((c) => {
         if (course[c - 1]) {
-          return `${course[c - 1].c_name}: ${course[c - 1].no_classes}`
+          return `${course[c - 1].c_name}: ${course[c - 1].no_classes} |`
         }
         return '' // Return empty string for undefined values
       })
@@ -181,11 +182,25 @@ const ProfileFaculty = (props) => {
               </div>
               <button
                 type="submit"
-                onClick={() => alert(renderTeachesNoOfClasses())}
                 className="btn btn-primary m-3"
+                data-bs-toggle="modal"
+                data-bs-target="#exampleModal"
               >
                 Courses handled
               </button>
+              {/* Modal */}
+              <div
+                class="modal fade"
+                id="exampleModal"
+                tabindex="-1"
+                aria-labelledby="exampleModalLabel"
+                aria-hidden="true"
+              >
+                <Modal
+                  title={'Attendence Status'}
+                  content={renderTeachesNoOfClasses()}
+                />
+              </div>
             </div>
           </div>
         </div>
