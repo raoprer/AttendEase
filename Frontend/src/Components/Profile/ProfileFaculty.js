@@ -49,7 +49,6 @@ const ProfileFaculty = (props) => {
                   Take Attedance
                 </button>
                 <div className="d-none">{courses.push(c)}</div>
-                <div className="d-none">{courses.push(c)}</div>
               </p>
             </div>
           )
