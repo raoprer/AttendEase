@@ -24,6 +24,7 @@ class Course(models.Model):
     c_code = models.CharField(max_length=500)
     c_name = models.CharField(max_length=500)
     credits = models.IntegerField()
+    no_classes = models.IntegerField()
 
 class Faculty(models.Model):
     f_id = models.AutoField(primary_key=True)

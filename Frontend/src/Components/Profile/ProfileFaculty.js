@@ -115,23 +115,15 @@ const ProfileFaculty = (props) => {
                   </div>
                   <div className="mb-3">
                     <label className="form-label">
-                      {' '}
                       Number of students: {studentcount}
                     </label>
                   </div>
                 </div>
               </div>
 
-              <div className="row col-lg-6">
-                <div className="d-grid col-lg- d-flex align-items-center justify-content-center">
-                  <button type="submit" className="btn btn-primary m-3">
-                    Courses handled
-                  </button>
-                  <button type="submit" className="btn btn-primary m-3">
-                    Teach new course
-                  </button>
-                </div>
-              </div>
+              <button type="submit" className="btn btn-primary m-3">
+                Courses handled
+              </button>
             </div>
           </div>
         </div>
