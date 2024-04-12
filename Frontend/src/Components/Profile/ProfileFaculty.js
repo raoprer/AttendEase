@@ -185,7 +185,7 @@ const ProfileFaculty = (props) => {
                 data-bs-toggle="modal"
                 data-bs-target="#exampleModal"
               >
-                Courses handled
+                Number of Classes Taken
               </button>
               {/* Modal */}
               <div
