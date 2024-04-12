@@ -1,29 +1,34 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import dp from '../../Images/profile_dp.png'
+import Modal from '../Modal/Modal'
 
 const ProfileStudent = (props) => {
   const [faculty, setFaculty] = useState([])
   const [course, setCourse] = useState([])
   const [student, setStudent] = useState([])
   const [schedule, setSchedule] = useState([])
+  const [learns, setLearns] = useState([])
   const i = props.pid.id // s_id
+  let avg = 0
   let courses = []
 
   useEffect(() => {
     const fetchAllFacultyAndCourses = async () => {
       try {
-        const [facultyRes, courseRes, studentRes, scheduleRes] =
+        const [facultyRes, courseRes, studentRes, scheduleRes, learnsRes] =
           await Promise.all([
             axios.get('http://127.0.0.1:8000/faculty'),
             axios.get('http://127.0.0.1:8000/course'),
             axios.get('http://127.0.0.1:8000/student'),
             axios.get('http://127.0.0.1:8000/schedule'),
+            axios.get('http://127.0.0.1:8000/learns'),
           ])
         setFaculty(facultyRes.data)
         setCourse(courseRes.data)
         setStudent(studentRes.data)
         setSchedule(scheduleRes.data)
+        setLearns(learnsRes.data)
         // console.log(faculty)
       } catch (err) {
         console.error(err)
@@ -86,6 +91,56 @@ const ProfileStudent = (props) => {
     return scheduleElements
   }
 
+  const getCourseAttendanceString = () => {
+    if (!student[i] || !student[i].s_learns) return ''
+
+    const attendanceString = student[i].s_learns
+      .map((c) => {
+        let cAttendance = 0
+        const courseName = course[c - 1]?.c_name || 'Unknown Course'
+        const noclasses = course[c - 1].no_classes
+        // alert(i)
+        learns.forEach((entry) => {
+          console.log(entry)
+          //   alert(+i + 1 + ' ' + c)
+          if (entry.s_id === +i + 1 && entry.c_id === c) {
+            cAttendance += entry.attendance
+          }
+        })
+        return courseName + ' : ' + cAttendance + ' out of ' + noclasses
+      })
+      .join(' | ')
+
+    return attendanceString
+  }
+
+  const getAverageAttendance = () => {
+    if (!student[i] || !student[i].s_learns) return 0
+
+    const totalAttendance = student[i].s_learns.reduce((total, c) => {
+      const attendance =
+        learns.find(
+          (entry) => entry.s_id === student[i].s_id && entry.c_id === c
+        )?.attendance || 0
+      return total + attendance
+    }, 0)
+    // alert(totalAttendance)
+
+    let totClasses = 0
+
+    course.forEach((c) => {
+      totClasses += c.no_classes
+    })
+
+    // Avoid division by zero
+    if (totClasses === 0) return 0
+
+    const averageAttendance = (totalAttendance * 100) / totClasses
+
+    // Return the average attendance rounded to two decimal places
+    return Math.round(averageAttendance * 100) / 100
+  }
+
   // Add a conditional check to prevent accessing undefined properties
   if (student.length === 0 || !student[i] || !student[i].s_name) {
     return <p>No student found.</p>
@@ -142,19 +197,31 @@ const ProfileStudent = (props) => {
                     <p>{courses.length}</p>
                   </div>
                   <div className="mb-3">
-                    <label className="form-label"> Average Attendance</label>
+                    <h5>Average Attendance: </h5>
+                    {getAverageAttendance()}%
                   </div>
                 </div>
               </div>
-              <div className="row col-lg-6">
-                <div className="d-grid d-flex align-items-center justify-content-center">
-                  <button type="submit" className="btn btn-primary m-3">
-                    Courses Registered
-                  </button>
-                  <button type="submit" className="btn btn-primary m-3">
-                    Learn New Course
-                  </button>
-                </div>
+              <button
+                type="submit"
+                className="btn btn-primary m-3"
+                data-bs-toggle="modal"
+                data-bs-target="#exampleModal"
+              >
+                Attendence Status
+              </button>
+              {/* Modal */}
+              <div
+                class="modal fade"
+                id="exampleModal"
+                tabindex="-1"
+                aria-labelledby="exampleModalLabel"
+                aria-hidden="true"
+              >
+                <Modal
+                  title={'Attendence Status'}
+                  content={getCourseAttendanceString()}
+                />
               </div>
             </div>
           </div>
