@@ -6,7 +6,9 @@ const ProfileFaculty = (props) => {
   const [faculty, setFaculty] = useState([])
   const [course, setCourse] = useState([])
   const [student, setStudent] = useState([])
+  const [schedule, setSchedule] = useState([])
   const i = props.pid.id //f_id
+  //   let s = ''
   console.log(i)
   let studentcount = 0
   let courses = []
@@ -14,14 +16,17 @@ const ProfileFaculty = (props) => {
   useEffect(() => {
     const fetchAllFacultyAndCourses = async () => {
       try {
-        const [facultyRes, courseRes, studentRes] = await Promise.all([
-          axios.get('http://127.0.0.1:8000/faculty'),
-          axios.get('http://127.0.0.1:8000/course'),
-          axios.get('http://127.0.0.1:8000/student'),
-        ])
+        const [facultyRes, courseRes, studentRes, scheduleRes] =
+          await Promise.all([
+            axios.get('http://127.0.0.1:8000/faculty'),
+            axios.get('http://127.0.0.1:8000/course'),
+            axios.get('http://127.0.0.1:8000/student'),
+            axios.get('http://127.0.0.1:8000/schedule'),
+          ])
         setFaculty(facultyRes.data)
         setCourse(courseRes.data)
         setStudent(studentRes.data)
+        setSchedule(scheduleRes.data)
         console.log(faculty)
       } catch (err) {
         console.error(err)
@@ -52,6 +57,25 @@ const ProfileFaculty = (props) => {
     }
   }
 
+  const renderTeachesNoOfClasses = () => {
+    let s = ''
+    if (faculty.length > 0 && faculty[i] && faculty[i].f_name) {
+      // Use map instead of forEach to create an array of strings
+      const coursesHandled = faculty[i].f_teaches.map((c) => {
+        if (course[c - 1]) {
+          return `${course[c - 1].c_name}: ${course[c - 1].no_classes}`
+        }
+        return '' // Return empty string for undefined values
+      })
+
+      // Join the array of strings with a line break
+      s = coursesHandled.join('\n')
+    } else {
+      s = 'Loading ...' // Show loading message while data is being fetched
+    }
+    return s // Return the string
+  }
+
   const renderStudentCourses = () => {
     const studentNames = student
       .filter((s) => courses.some((c) => s.s_learns.includes(c)))
@@ -64,6 +88,36 @@ const ProfileFaculty = (props) => {
         ))}
       </div>
     )
+  }
+
+  const displaySchedules = () => {
+    // Initialize an array to hold JSX elements representing schedules
+    const scheduleElements = []
+    // Iterate over each course
+    courses.forEach((c) => {
+      // Filter the schedule to find matching entries for the current course
+      const matchingSchedules = schedule.filter((entry) => entry.c_id === c)
+      scheduleElements.push(
+        <div>
+          <h5>{course[c - 1].c_name}</h5>
+        </div>
+      )
+      // Map the matching schedules to create JSX elements
+      matchingSchedules.forEach((m) => {
+        // Create a JSX element for each schedule entry
+        const scheduleElement = (
+          <div key={m.sch_id}>
+            <p>
+              {m.day} : {m.time}
+            </p>
+          </div>
+        )
+        // Push the JSX element to the array
+        scheduleElements.push(scheduleElement)
+      })
+    })
+    // Return the array of JSX elements
+    return scheduleElements
   }
 
   return (
@@ -85,7 +139,8 @@ const ProfileFaculty = (props) => {
                   <h5>Students: </h5>
                   {renderStudentCourses()}
                   <br />
-                  <h5>Weekly Schedule: </h5>
+                  <h5>Schedule: </h5>
+                  {displaySchedules()}
                   <br />
                 </div>
 
@@ -120,8 +175,11 @@ const ProfileFaculty = (props) => {
                   </div>
                 </div>
               </div>
-
-              <button type="submit" className="btn btn-primary m-3">
+              <button
+                type="submit"
+                onClick={() => alert(renderTeachesNoOfClasses())}
+                className="btn btn-primary m-3"
+              >
                 Courses handled
               </button>
             </div>
