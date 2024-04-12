@@ -32,21 +32,15 @@ const ProfileInstitute = (props) => {
   }, [])
 
   const renderOfferedDegrees = () => {
-    if (institute.length > 0 && institute[i] && institute[i].has_degree) {
-      return institute[i].has_degree.map((d) => {
-        if (degree[d - 1]) {
-          return (
-            <div key={d}>
-              <p>{degree[d - 1].d_name}</p>
-            </div>
-          )
-        } else {
-          return null // Return null for undefined values
-        }
-      })
-    } else {
-      return <p>No degrees offered.</p>
-    }
+    return degree.map((d) => {
+      return (
+        <div key={d.id}>
+          {' '}
+          {/* Assuming degree objects have unique IDs */}
+          <p>{d.d_name}</p>
+        </div>
+      )
+    })
   }
 
   return (
@@ -92,12 +86,6 @@ const ProfileInstitute = (props) => {
                       )}
                   </div>
                 </div>
-                <button type="submit" class="btn btn-primary m-1">
-                  Create Degree
-                </button>
-                <button type="submit" class="btn btn-primary m-1">
-                  Create Course
-                </button>
               </form>
             </div>
           </div>
