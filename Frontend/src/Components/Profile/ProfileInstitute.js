@@ -1,40 +1,71 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import axios from 'axios'
 import dp from '../../Images/profile_dp.png'
 
-const ProfileInstitute = () => {
+const ProfileInstitute = (props) => {
+  const [faculty, setFaculty] = useState([])
+  const [degree, setDegree] = useState([])
+  const [student, setStudent] = useState([])
+  const [institute, setInstitute] = useState([])
+  const i = props.pid.id // f_id
+
+  useEffect(() => {
+    const fetchAllData = async () => {
+      try {
+        const [facultyRes, degreeRes, studentRes, instituteRes] =
+          await Promise.all([
+            axios.get('http://127.0.0.1:8000/faculty'),
+            axios.get('http://127.0.0.1:8000/degree'),
+            axios.get('http://127.0.0.1:8000/student'),
+            axios.get('http://127.0.0.1:8000/institute'),
+          ])
+        setFaculty(facultyRes.data)
+        setDegree(degreeRes.data)
+        setStudent(studentRes.data)
+        setInstitute(instituteRes.data)
+        console.log(faculty)
+      } catch (err) {
+        console.error(err)
+      }
+    }
+    fetchAllData()
+  }, [])
+
+  const renderOfferedDegrees = () => {
+    if (institute.length > 0 && institute[i] && institute[i].has_degree) {
+      return institute[i].has_degree.map((d) => {
+        if (degree[d - 1]) {
+          return (
+            <div key={d}>
+              <p>{degree[d - 1].d_name}</p>
+            </div>
+          )
+        } else {
+          return null // Return null for undefined values
+        }
+      })
+    } else {
+      return <p>No degrees offered.</p>
+    }
+  }
+
   return (
-    <div class="container mt-5">
-      <div class="row justify-content-center">
-        <div class="col-md-8">
-          <div class="card">
-            <div class="card-header text-center">
+    <div className="container mt-5">
+      <div className="row justify-content-center">
+        <div className="col-md-8">
+          <div className="card">
+            <div className="card-header text-center">
               <h2>Institute Profile Information</h2>
             </div>
-            <div class="card-body">
-              <h3>Username</h3>
+            <div className="card-body">
+              {institute.length > 0 && institute[i] && (
+                <h3>{institute[i].i_name}</h3>
+              )}
               <form>
-                <div class="row">
-                  <div class="col-md-6 second">
-                    <div class="mb-3">
-                      <label for="degrees" class="form-label">
-                        Degrees
-                      </label>
-                    </div>
-                    <div class="mb-3">
-                      <label for="Courses" class="form-label">
-                        Courses
-                      </label>
-                    </div>
-                    <div class="mb-3">
-                      <label for="Faculties" class="form-label">
-                        Faculties
-                      </label>
-                    </div>
-                    <div class="mb-3">
-                      <label for="Students" class="form-label">
-                        Students
-                      </label>
-                    </div>
+                <div className="row">
+                  <div className="col-md-6 second">
+                    <h5>Degrees: </h5>
+                    {renderOfferedDegrees()}
                   </div>
 
                   <div class="col-md-6">
@@ -51,17 +82,14 @@ const ProfileInstitute = () => {
                       </label>
                     </div>
 
-                    <div class="mb-3">
-                      <label for="Address" class="form-label">
-                        Address
-                      </label>
-                      <textarea
-                        class="form-control"
-                        id="Address"
-                        rows="3"
-                        placeholder="Enter location address"
-                      ></textarea>
-                    </div>
+                    {institute.length > 0 &&
+                      institute[i] &&
+                      institute[i].address && (
+                        <div class="mb-3">
+                          <h5>Address: </h5>
+                          <p>{institute[i].address}</p>
+                        </div>
+                      )}
                   </div>
                 </div>
                 <button type="submit" class="btn btn-primary m-1">
