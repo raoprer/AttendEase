@@ -1,5 +1,12 @@
 from django.db import models
 
+class Degree(models.Model):
+    d_id = models.AutoField(primary_key=True)
+    d_code = models.CharField(max_length=500)
+    d_name = models.CharField(max_length=500)
+    duration = models.IntegerField()
+    description = models.CharField(max_length=500)
+
 class Institute(models.Model):
     i_id = models.AutoField(primary_key=True)
     i_code = models.CharField(max_length=500)
@@ -9,13 +16,7 @@ class Institute(models.Model):
     location = models.CharField(max_length=500)
     address = models.CharField(max_length=500)
     university = models.CharField(max_length=500)
-
-class Degree(models.Model):
-    d_id = models.AutoField(primary_key=True)
-    d_code = models.CharField(max_length=500)
-    d_name = models.CharField(max_length=500)
-    duration = models.IntegerField()
-    description = models.CharField(max_length=500)
+    has_degree = models.ManyToManyField(Degree)
 
 class Course(models.Model):
     c_id = models.AutoField(primary_key=True)
@@ -32,6 +33,7 @@ class Faculty(models.Model):
     f_dp = models.CharField(max_length=500)
     university = models.CharField(max_length=500)
     f_password = models.CharField(max_length=500)
+    f_teaches = models.ManyToManyField(Course)
 
 class Student(models.Model):
     s_id = models.AutoField(primary_key=True)
@@ -48,6 +50,7 @@ class Student(models.Model):
     img3 = models.CharField(max_length=500)
     img4 = models.CharField(max_length=500)
     img5 = models.CharField(max_length=500)
+    s_learns = models.ManyToManyField(Course)
 
 class Schedule(models.Model):
     sch_id = models.AutoField(primary_key=True)

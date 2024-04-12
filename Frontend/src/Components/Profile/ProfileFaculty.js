@@ -2,11 +2,12 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import dp from '../../Images/profile_dp.png'
 
-const ProfileFaculty = () => {
+const ProfileFaculty = (props) => {
   const [faculty, setFaculty] = useState([])
   const [course, setCourse] = useState([])
   const [student, setStudent] = useState([])
-  const i = 2
+  const i = props.pid.id //f_id-1
+  console.log(i)
   let studentcount = 0
   let courses = []
 
@@ -28,7 +29,7 @@ const ProfileFaculty = () => {
     }
 
     fetchAllFacultyAndCourses()
-  }, [])
+  }, [i])
 
   const renderTeachesCourses = () => {
     if (faculty.length > 0 && faculty[i] && faculty[i].f_name) {

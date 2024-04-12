@@ -8,10 +8,11 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 function App() {
   return (
     <>
-      {/* <Home /> */}
-      {/* <LoginSignup login={0} /> */}
-      {/* <ProfileComplete id={2} /> */}
-      <Profile id={2} />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/faculty/profile/:id" element={<Profile id={2} />} />
+        </Routes>
+      </BrowserRouter>
     </>
   )
 }
