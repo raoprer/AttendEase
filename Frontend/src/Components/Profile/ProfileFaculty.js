@@ -6,7 +6,7 @@ const ProfileFaculty = (props) => {
   const [faculty, setFaculty] = useState([])
   const [course, setCourse] = useState([])
   const [student, setStudent] = useState([])
-  const i = props.pid.id //f_id-1
+  const i = props.pid.id //f_id
   console.log(i)
   let studentcount = 0
   let courses = []

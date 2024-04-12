@@ -1,5 +1,6 @@
 import React from 'react'
 import logo from '../../Images/AttendEaseLogo.png'
+import { Link } from 'react-router-dom'
 
 const Navbar = (props) => {
   let hide = props.hide
@@ -8,9 +9,9 @@ const Navbar = (props) => {
     <div>
       <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container">
-          <a class="navbar-brand logo" href="#">
-            <img src={logo} alt="AttendEase Logo"></img>
-          </a>
+          <Link to="/home">
+            <img src={logo} alt="AttendEase"></img>
+          </Link>
           <button
             class="navbar-toggler"
             type="button"
@@ -41,7 +42,12 @@ const Navbar = (props) => {
               </li>
               <li class="nav-item">
                 <a class="nav-link nav-btn" href="#how-it-works">
-                  Login
+                  <Link
+                    to="/login"
+                    style={{ textDecoration: 'none', color: 'white' }}
+                  >
+                    Login
+                  </Link>
                 </a>
               </li>
             </ul>

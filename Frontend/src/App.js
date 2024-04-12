@@ -10,7 +10,13 @@ function App() {
     <>
       <BrowserRouter>
         <Routes>
+          <Route index element={<Home />} />
+          <Route path="/home" element={<Home />} />
+          <Route path="/login" element={<LoginSignup login={1} />} />
+          <Route path="/signup" element={<LoginSignup login={0} />} />
+          <Route path="/institute/profile/:id" element={<Profile id={1} />} />
           <Route path="/faculty/profile/:id" element={<Profile id={2} />} />
+          <Route path="/student/profile/:id" element={<Profile id={3} />} />
         </Routes>
       </BrowserRouter>
     </>

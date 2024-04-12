@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import teaching from '../../Images/home_teaching.png'
 
 const HomeContent = () => {
@@ -37,11 +38,14 @@ const HomeContent = () => {
               </div>
             </div>
           </div>
-          <a href="#" class="btn btn-dark btn-lg m-1">
+          <Link
+            to="/login"
+            style={{ textDecoration: 'none' }}
+            class="btn btn-dark btn-lg m-1"
+          >
             Login
-          </a>
+          </Link>
           <a href="" class="btn btn-outline-dark btn-lg m-1">
-            {' '}
             SignUp
           </a>
         </div>
