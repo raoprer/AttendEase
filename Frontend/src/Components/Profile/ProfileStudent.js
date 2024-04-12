@@ -10,7 +10,6 @@ const ProfileStudent = (props) => {
   const [schedule, setSchedule] = useState([])
   const [learns, setLearns] = useState([])
   const i = props.pid.id // s_id
-  let avg = 0
   let courses = []
 
   useEffect(() => {
@@ -46,7 +45,6 @@ const ProfileStudent = (props) => {
             <div key={c}>
               <p>
                 {course[c - 1].c_name} : {course[c - 1].credits} Credits
-                <div className="d-none">{courses.push(c)}</div>
               </p>
             </div>
           )

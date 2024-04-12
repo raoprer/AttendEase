@@ -43,7 +43,11 @@ const ProfileFaculty = (props) => {
           return (
             <div key={c}>
               <p>
-                {course[c - 1].c_name} : {course[c - 1].credits} Credits
+                {course[c - 1].c_name} : {course[c - 1].credits} Credits{' '}
+                <button className="btn btn-sm btn-outline-secondary">
+                  Take Attedance
+                </button>
+                <div className="d-none">{courses.push(c)}</div>
                 <div className="d-none">{courses.push(c)}</div>
               </p>
             </div>
