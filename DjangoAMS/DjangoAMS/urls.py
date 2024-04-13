@@ -18,6 +18,7 @@ from django.urls import path, re_path, include
 from django.contrib import admin
 from AttendEase import views
 
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     
@@ -51,6 +52,8 @@ urlpatterns = [
     path('faculty/<int:faculty_id>/courses/', views.faculty_courses, name='faculty_courses'),
 
     path('upload/', views.upload_file, name='upload_file'),
+
+    path('run-script/', views.run_python_script, name='run_script'),
 ]
 
 

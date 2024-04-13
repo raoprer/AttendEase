@@ -10,6 +10,8 @@ from django.core.files.storage import default_storage
 
 from django.http import JsonResponse
 
+from subprocess import run
+
 @csrf_exempt
 def instituteApi(request,id=0):
     if request.method=='GET':
@@ -287,3 +289,13 @@ def upload_file(request):
         return JsonResponse({'message': 'File uploaded successfully', 'file_name': file_name}, status=200)
     else:
         return JsonResponse({'error': 'File not provided or request method not allowed'}, status=400)
+    
+
+def run_python_script(request):
+    try:
+        # Replace the path with your actual Python script path
+        run(['python', 'C:/Users/mprer/Desktop/Face-Recognition-System/run.py'])
+        return JsonResponse({'message': 'Script executed successfully'}, status=200)
+    except Exception as e:
+        return JsonResponse({'error': str(e)}, status=500)
+

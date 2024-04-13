@@ -37,6 +37,19 @@ const ProfileFaculty = (props) => {
     fetchAllFacultyAndCourses()
   }, [i])
 
+  const handleButtonClick = () => {
+    axios
+      .post('/run-script/')
+      .then((response) => {
+        console.log(response.data)
+        alert('Success')
+      })
+      .catch((error) => {
+        console.error(error)
+        alert('Error')
+      })
+  }
+
   const renderTeachesCourses = () => {
     if (faculty.length > 0 && faculty[i] && faculty[i].f_name) {
       return faculty[i].f_teaches.map((c) => {
@@ -45,7 +58,10 @@ const ProfileFaculty = (props) => {
             <div key={c}>
               <p>
                 {course[c - 1].c_name} : {course[c - 1].credits} Credits{' '}
-                <button className="btn btn-sm btn-outline-secondary">
+                <button
+                  className="btn btn-sm btn-outline-secondary"
+                  onClick={handleButtonClick}
+                >
                   Take Attedance
                 </button>
                 <div className="d-none">{courses.push(c)}</div>
