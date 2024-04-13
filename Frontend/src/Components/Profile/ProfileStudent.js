@@ -97,7 +97,7 @@ const ProfileStudent = (props) => {
       .map((c) => {
         let cAttendance = 0
         const courseName = course[c - 1]?.c_name || 'Unknown Course'
-        const noclasses = course[c - 1].no_classes
+        let noclasses = course[c - 1].no_classes
         // alert(i)
         learns.forEach((entry) => {
           console.log(entry)
@@ -106,6 +106,8 @@ const ProfileStudent = (props) => {
             cAttendance += entry.attendance
           }
         })
+        cAttendance++
+        noclasses++
         return courseName + ' : ' + cAttendance + ' out of ' + noclasses
       })
       .join(' | ')
@@ -134,7 +136,7 @@ const ProfileStudent = (props) => {
     // Avoid division by zero
     if (totClasses === 0) return 0
 
-    const averageAttendance = (totalAttendance * 100) / totClasses
+    const averageAttendance = totalAttendance / totClasses
 
     // Return the average attendance rounded to two decimal places
     return Math.round(averageAttendance * 100) / 100

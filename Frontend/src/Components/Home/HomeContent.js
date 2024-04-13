@@ -45,9 +45,9 @@ const HomeContent = () => {
           >
             Login
           </Link>
-          <a href="" class="btn btn-outline-dark btn-lg m-1">
+          {/* <a href="" class="btn btn-outline-dark btn-lg m-1">
             SignUp
-          </a>
+          </a> */}
         </div>
       </section>
 
