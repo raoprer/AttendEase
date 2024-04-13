@@ -136,10 +136,10 @@ const ProfileStudent = (props) => {
     // Avoid division by zero
     if (totClasses === 0) return 0
 
-    const averageAttendance = totalAttendance / totClasses
+    const averageAttendance = (totalAttendance * 100) / totClasses
 
     // Return the average attendance rounded to two decimal places
-    return Math.round(averageAttendance * 100) / 100
+    return Math.round(averageAttendance)
   }
 
   // Add a conditional check to prevent accessing undefined properties
