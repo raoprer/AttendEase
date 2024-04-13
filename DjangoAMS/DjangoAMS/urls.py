@@ -54,6 +54,8 @@ urlpatterns = [
     path('upload/', views.upload_file, name='upload_file'),
 
     path('run-script/', views.run_python_script, name='run_script'),
+
+    path('websocket/', views.websocket_server),
 ]
 
 

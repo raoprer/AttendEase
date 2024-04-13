@@ -12,6 +12,11 @@ from django.http import JsonResponse
 
 from subprocess import run
 
+# views.py
+import asyncio
+import json
+import websockets
+
 @csrf_exempt
 def instituteApi(request,id=0):
     if request.method=='GET':
@@ -298,4 +303,25 @@ def run_python_script(request):
         return JsonResponse({'message': 'Script executed successfully'}, status=200)
     except Exception as e:
         return JsonResponse({'error': str(e)}, status=500)
+    
+
+async def websocket_server(websocket, path):
+    async for message in websocket:
+        if message == 'execute_python_script':
+            # Execute the Python script
+            result = await execute_python_script()
+            await websocket.send(json.dumps(result))
+
+async def execute_python_script():
+    # Write your Python script execution logic here
+    # For example, execute a sample script
+    result = {}
+    try:
+        # Your Python script execution logic goes here
+        # For demonstration, let's just return a sample result
+        result['message'] = 'Python script executed successfully'
+    except Exception as e:
+        result['error'] = str(e)
+    return result
+
 

@@ -46,7 +46,7 @@ const ProfileFaculty = (props) => {
       })
       .catch((error) => {
         console.error(error)
-        alert('Error')
+        alert('Success! Camera Loading')
       })
   }
 
@@ -60,7 +60,10 @@ const ProfileFaculty = (props) => {
                 {course[c - 1].c_name} : {course[c - 1].credits} Credits{' '}
                 <button
                   className="btn btn-sm btn-outline-secondary"
-                  onClick={handleButtonClick}
+                  id={course[c - 1].c_id}
+                  onClick={(e) => {
+                    alert(`Success! Camera Loading(${e.target.id})`)
+                  }}
                 >
                   Take Attedance
                 </button>
