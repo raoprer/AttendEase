@@ -8,6 +8,7 @@ const ProfileFaculty = (props) => {
   const [course, setCourse] = useState([])
   const [student, setStudent] = useState([])
   const [schedule, setSchedule] = useState([])
+  const [nc, setNc] = useState(0)
   const i = props.pid.id //f_id
   //   let s = ''
   console.log(i)
@@ -62,7 +63,11 @@ const ProfileFaculty = (props) => {
                   className="btn btn-sm btn-outline-secondary"
                   id={course[c - 1].c_id}
                   onClick={(e) => {
-                    alert(`Success! Camera Loading(${e.target.id})`)
+                    alert(`Success! Camera Loading (${e.target.id})`)
+                    // alert(+1 + course[e.target.id - 1].no_classes)
+                    course[e.target.id - 1].no_classes =
+                      +1 + course[e.target.id - 1].no_classes
+                    setNc(course[e.target.id - 1].no_classes)
                   }}
                 >
                   Take Attedance
